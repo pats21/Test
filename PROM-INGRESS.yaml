@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-prometheus-graph
+  namespace: monitoring
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    ingress.kubernetes.io/rewrite-target: /graph
+    ingress.kubernetes.io/rule-type: PathPrefix
+spec:
+  rules:
+  - host:
+    http:
+      paths:
+      - path: /prometheus-graph
+        backend:
+          serviceName: prometheus
+          servicePort: 9090
